@@ -1,0 +1,10 @@
+{
+  "scopes": [],
+  "attributes": [],
+  "role-templates": [],
+  "oauth2-configuration": {
+    "rcds add mta": [
+      "https://api.cf.us10-001.hana.ondemand.com"  
+    ]
+ }
+}
