@@ -1,10 +1,31 @@
 {
-  "scopes": [],
-  "attributes": [],
-  "role-templates": [],
-  "oauth2-configuration": {
-    "rcds add mta": [
-      "https://api.cf.us10-001.hana.ondemand.com"  
-    ]
- }
+ "scopes": [
+  {
+   "name": "$XSAPPNAME.SafetyViewer",
+   "description": "SafetyViewer"
+  },
+  {
+   "name": "$XSAPPNAME.SafetyManager",
+   "description": "SafetyManager"
+  }
+ ],
+ "attributes": [],
+ "role-templates": [
+  {
+   "name": "SafetyViewer",
+   "description": "generated",
+   "scope-references": [
+    "$XSAPPNAME.SafetyViewer"
+   ],
+   "attribute-references": []
+  },
+  {
+   "name": "SafetyManager",
+   "description": "generated",
+   "scope-references": [
+    "$XSAPPNAME.SafetyManager"
+   ],
+   "attribute-references": []
+  }
+ ]
 }

@@ -15,6 +15,18 @@
       "version": "1.13.6",
       "toolsId": "0f0f4bc4-27bc-45ff-8c45-4ee75b948a56"
     },
+    "crossNavigation": {
+      "inbounds": {
+        "Safety-display": {
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          },
+          "semanticObject": "Safety",
+          "action": "display"
+        }
+      }
+    },
     "dataSources": {
       "mainService": {
         "uri": "/odata/v4/safety-activity/",
@@ -138,5 +150,9 @@
   "sap.fiori": {
     "registrationIds": [],
     "archeType": "transactional"
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "safety.service"
   }
 }
