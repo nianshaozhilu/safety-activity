@@ -98,9 +98,23 @@ modules:
       - safetyactivitysafetyactivity.zip
       name: safetyactivitysafetyactivity
       target-path: resources/
+    - artifacts:
+      - orgs.zip
+      name: orgs
+      target-path: resources/
 - name: safetyactivitysafetyactivity
   type: html5
   path: app/safety-activity
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: orgs
+  type: html5
+  path: app/orgs
   build-parameters:
     build-result: dist
     builder: custom

@@ -9,8 +9,8 @@ namespace hse;
 
 entity SafetyActivity : cuid, managed {
     activityTheme : String(100) @mandatory;
-    org           : Association to Orgs @mandatory;
-    dept          : Association to Depts @mandatory;
+    org           : Association to Orgs;
+    dept          : Association to Depts;
     team          : Association to Teams;
     emcee         : User;
 //    activityStartTime:DateTime;
@@ -21,6 +21,9 @@ entity SafetyActivity : cuid, managed {
 
 entity Orgs : cuid, managed {
     orgName        : String(111);
+    desc:String(200);
+    code:String(100);
+    shortName:String(100);
     safetyActivity : Association to many SafetyActivity
                          on safetyActivity.org = $self;
 }
