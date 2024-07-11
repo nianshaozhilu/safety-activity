@@ -1,14 +1,14 @@
 _schema-version: "3.1"
-ID: safety-activity
+ID: hse
 description: A simple CAP project.
 version: 1.0.0
 modules:
-- name: safety-activity-srv
+- name: hse-srv
   type: nodejs
   path: gen/srv
   requires:
-  - name: safety-activity-auth
-  - name: safety-activity-db
+  - name: hse-auth
+  - name: HSE_HDI 
   provides:
   - name: srv-api
     properties:
@@ -19,7 +19,7 @@ modules:
     readiness-health-check-type: http
   build-parameters:
     builder: npm
-- name: safety-activity
+- name: hseRouter
   type: approuter.nodejs
   path: app/router
   requires:
@@ -29,8 +29,8 @@ modules:
       forwardAuthToken: true
       name: srv-api
       url: ~{srv-url}
-  - name: safety-activity-auth
-  - name: safety-activity-destination
+  - name: hse-auth
+  - name: hse-destination
     group: destinations
     properties:
       forwardAuthToken: false
@@ -40,26 +40,26 @@ modules:
     disk-quota: 256M
     keep-existing-routes: true
     memory: 256M
-- name: safety-activity-db-deployer
+- name: hse-db-deployer
   type: hdb
   path: gen/db
   requires:
-  - name: safety-activity-db
+  - name: HSE_HDI 
   parameters:
     buildpack: nodejs_buildpack
-- name: safety-activity-destinations
+- name: hse-destinations
   type: com.sap.application.content
   requires:
-  - name: safety-activity-auth
+  - name: hse-auth
     parameters:
       service-key:
-        name: safety-activity-auth-key
-  - name: safety-activity-html5-repo-host
+        name: hse-auth-key
+  - name: hse-html5-repo-host
     parameters:
       service-key:
-        name: safety-activity-html5-repo-host-key
+        name: hse-html5-repo-host-key
   - name: srv-api
-  - name: safety-activity-destination
+  - name: hse-destination
     parameters:
       content-target: true
   parameters:
@@ -67,42 +67,42 @@ modules:
       instance:
         destinations:
         - Authentication: OAuth2UserTokenExchange
-          Name: safety-activity-app-srv
-          TokenServiceInstanceName: safety-activity-auth
-          TokenServiceKeyName: safety-activity-auth-key
+          Name: hse-app-srv
+          TokenServiceInstanceName: hse-auth
+          TokenServiceKeyName: hse-auth-key
           URL: ~{srv-api/srv-url}
-          sap.cloud.service: safety.service
-        - Name: safety-activity-html5-repo-host
-          ServiceInstanceName: safety-activity-html5-repo-host
-          ServiceKeyName: safety-activity-html5-repo-host-key
-          sap.cloud.service: safety.service
+          sap.cloud.service: hse.service
+        - Name: hse-html5-repo-host
+          ServiceInstanceName: hse-html5-repo-host
+          ServiceKeyName: hse-html5-repo-host-key
+          sap.cloud.service: hse.service
         - Authentication: OAuth2UserTokenExchange
-          Name: safety-activity-auth
-          ServiceInstanceName: safety-activity-auth
-          ServiceKeyName: safety-activity-auth-key
-          sap.cloud.service: safety.service
+          Name: hse-auth
+          ServiceInstanceName: hse-auth
+          ServiceKeyName: hse-auth-key
+          sap.cloud.service: hse.service
         existing_destinations_policy: update
   build-parameters:
     no-source: true
-- name: safety-activity-app-content
+- name: hse-app-content
   type: com.sap.application.content
   path: .
   requires:
-  - name: safety-activity-html5-repo-host
+  - name: hse-html5-repo-host
     parameters:
       content-target: true
   build-parameters:
     build-result: resources
     requires:
     - artifacts:
-      - safetyactivitysafetyactivity.zip
-      name: safetyactivitysafetyactivity
+      - safetyActivity.zip
+      name: safetyActivity
       target-path: resources/
     - artifacts:
       - orgs.zip
       name: orgs
       target-path: resources/
-- name: safetyactivitysafetyactivity
+- name: safetyActivity
   type: html5
   path: app/safety-activity
   build-parameters:
@@ -123,7 +123,7 @@ modules:
     - npm run build:cf
     supported-platforms: []
 resources:
-- name: safety-activity-auth
+- name: hse-auth
   type: org.cloudfoundry.managed-service
   parameters:
     config:
@@ -137,16 +137,16 @@ resources:
         role-template-references:
         - $XSAPPNAME.SafetyViewer
       tenant-mode: dedicated
-      xsappname: safety-activity-${org}-${space}
+      xsappname: hse-${org}-${space}
     path: ./xs-security.json
     service: xsuaa
     service-plan: application
-- name: safety-activity-db
+- name: HSE_HDI 
   type: com.sap.xs.hdi-container
   parameters:
     service: hana
     service-plan: hdi-shared
-- name: safety-activity-destination
+- name: hse-destination
   type: org.cloudfoundry.managed-service
   parameters:
     config:
@@ -162,7 +162,7 @@ resources:
           existing_destinations_policy: update
     service: destination
     service-plan: lite
-- name: safety-activity-html5-repo-host
+- name: hse-html5-repo-host
   type: org.cloudfoundry.managed-service
   parameters:
     service: html5-apps-repo

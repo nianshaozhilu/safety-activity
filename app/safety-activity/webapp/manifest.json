@@ -1,7 +1,7 @@
 {
   "_version": "1.59.0",
   "sap.app": {
-    "id": "safetyactivity.safetyactivity",
+    "id": "safetyActivity",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -73,7 +73,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "safetyactivity.safetyactivity.i18n.i18n"
+          "bundleName": "safetyActivity.i18n.i18n"
         }
       },
       "": {
@@ -153,6 +153,6 @@
   },
   "sap.cloud": {
     "public": true,
-    "service": "safety.service"
+    "service": "hse.service"
   }
 }

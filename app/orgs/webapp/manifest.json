@@ -153,6 +153,6 @@
   },
   "sap.cloud": {
     "public": true,
-    "service": "safety.service"
+    "service": "hse.service"
   }
 }
